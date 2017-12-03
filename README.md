@@ -36,6 +36,12 @@ Now, use `spammer()` helper.
 
 ## Documentation
 
+* [Helpers](#helpers)
+* [Console Command](#console-command)
+
+
+#### Helpers
+
 Store IP-address in a spam-table:
 
     spammer('1.2.3.4')->store();
@@ -54,6 +60,16 @@ Restore IP-address from a spam-table:
 Check exists IP-address in a spam-table:
 
     spammer('1.2.3.4')->exists();
+
+
+#### Console Command
+
+This package maybe called in a console:
+
+    spam:store
+    spam:delete
+    spam:restore
+    spam:exists
 
 
 ## Support Package
