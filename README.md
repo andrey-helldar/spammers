@@ -66,10 +66,10 @@ Check exists IP-address in a spam-table:
 
 This package maybe called in a console:
 
-    spam:store
-    spam:delete
-    spam:restore
-    spam:exists
+    spam:store "1.2.3.4" "1.2.3.5" "1.2.3.6"
+    spam:delete "1.2.3.4" "1.2.3.5" "1.2.3.6"
+    spam:restore "1.2.3.4" "1.2.3.5" "1.2.3.6"
+    spam:exists "1.2.3.4" "1.2.3.5" "1.2.3.6"
 
 
 ## Support Package
