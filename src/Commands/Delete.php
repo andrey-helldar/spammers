@@ -11,7 +11,7 @@ class Delete extends Command
      *
      * @var string
      */
-    protected $signature = 'spam:store';
+    protected $signature = 'spam:delete';
 
     /**
      * The console command description.

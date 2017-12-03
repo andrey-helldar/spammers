@@ -11,7 +11,7 @@ class Restore extends Command
      *
      * @var string
      */
-    protected $signature = 'spam:store';
+    protected $signature = 'spam:restore';
 
     /**
      * The console command description.
