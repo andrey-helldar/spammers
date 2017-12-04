@@ -19,14 +19,18 @@ class Spammer
     protected $expired_at = null;
 
     /**
-     * Spammer constructor.
+     * Get a IP-address.
      *
-     * @param string $ip
+     * @param null $ip
+     *
+     * @return mixed
      */
-    public function __construct($ip = null)
+    public function ip($ip = null)
     {
-        $this->ip = $ip;
+        $this->ip     = $ip;
         $this->errors = $this->isIpValidateError();
+
+        return $this;
     }
 
     /**
@@ -40,7 +44,7 @@ class Spammer
     {
         if ($hours) {
             $this->expired_at = Carbon::now()
-                ->addHours((int) $hours);
+                ->addHours((int)$hours);
         }
 
         return $this;
@@ -113,9 +117,9 @@ class Spammer
     public function exists()
     {
         if ($time = config('spammers.use_cache', false)) {
-            $key = str_slug('spammers_exists_'.$this->ip);
+            $key = str_slug('spammers_exists_' . $this->ip);
 
-            return Cache::remember($key, (int) $time, function () {
+            return Cache::remember($key, (int)$time, function() {
                 return (new IpAddressExists($this->ip))->check();
             });
         }

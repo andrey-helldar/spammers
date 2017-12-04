@@ -2,13 +2,11 @@
 
 if (!function_exists('spammer')) {
     /**
-     * @param null|string $ip
-     *
      * @return \Helldar\Spammers\Facade\Spammer
      */
-    function spammer($ip = null)
+    function spammer()
     {
-        return new \Helldar\Spammers\Facade\Spammer($ip);
+        return new \Helldar\Spammers\Facade\Spammer();
     }
 }
 

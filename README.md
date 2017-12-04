@@ -59,22 +59,30 @@ Now, use `spammer()` helper and Artisan commands.
 
 Store IP-address in a spam-table:
 
-    spammer('1.2.3.4')->store();
+    spammer()
+        ->ip('1.2.3.4')
+        ->store();
 
 
 Delete IP-address from a spam-table:
 
-    spammer('1.2.3.4')->delete();
+    spammer()
+        ->ip('1.2.3.4')
+        ->delete();
 
 
 Restore IP-address from a spam-table:
 
-    spammer('1.2.3.4')->restore();
+    spammer()
+        ->ip('1.2.3.4')
+        ->restore();
 
 
 Check exists IP-address in a spam-table:
 
-    spammer('1.2.3.4')->exists();
+    spammer()
+        ->ip('1.2.3.4')
+        ->exists();
 
 Set up a schedule to exclude IP addresses that have expired from the spam table. To do this, add the following rules in the `schedule()` method of the `Console/Kernel.php` file:
 
@@ -89,8 +97,8 @@ $schedule->command('spam:scan')
 To save an IP address with the URL in the database, use the helper `spammer_access()`:
 
     spammer_access()
-        ->ip($ip = null)
-        ->url($url = null)
+        ->ip('1.2.3.4')
+        ->url('/foo/bar')
         ->store();
 
 Ban when attempts to get pages with errors exceed a given number.
