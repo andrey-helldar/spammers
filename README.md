@@ -4,9 +4,6 @@ Simple package to prevent accessing of spammers to Laravel application.
 
 ![spammers](https://user-images.githubusercontent.com/10347617/33530091-1cba8f1a-d88b-11e7-8d1d-eb7a924199d2.png)
 
-# -= Coming Soon =-
-This code was written without testing and without running on a production project. Therefore, it can contain errors and does not work at all. Temporarily :)
-
 ## Installation
 
 To get the latest version of this package, simply require the project using [Composer](https://getcomposer.org/):
@@ -31,12 +28,13 @@ If you don't use auto-discovery, add the ServiceProvider to the providers array 
 
 Next, call `php artisan vendor:publish` command.
 
-Now, use `spammer()` helper.
+Now, use `spammer()` helper and Artisan commands.
 
 
 ## Documentation
 
 * [Helpers](#helpers)
+* [Middleware](#middleware)
 * [Console Command](#console-command)
 
 
@@ -61,16 +59,49 @@ Check exists IP-address in a spam-table:
 
     spammer('1.2.3.4')->exists();
 
+Set up a schedule to exclude IP addresses that have expired from the spam table. To do this, add the following rules in the `schedule()` method of the `Console/Kernel.php` file:
+
+```php
+$schedule->command('spam:scan')
+    ->hourly();
+```
+
+
+##### Middleware
+
+Next, add link to middleware in `$routeMiddleware` block in `app/Http/Kernel.php` file, and use him in `$middlewareGroups` blocks:
+
+```php
+protected $middlewareGroups = [
+    'web' => [
+        // ...
+        'spammers'
+    ],
+
+    'api' => [
+        // ...
+        'spammers'
+    ],
+];
+
+protected $routeMiddleware = [
+    // ...
+    'spammers' => Helldar\Spammers\Middleware\Spammers::class
+];
+```
+
 
 #### Console Command
 
 This package maybe called in a console:
 
-    spam:store "1.2.3.4" "1.2.3.5" "1.2.3.6"
-    spam:delete "1.2.3.4" "1.2.3.5" "1.2.3.6"
-    spam:restore "1.2.3.4" "1.2.3.5" "1.2.3.6"
-    spam:exists "1.2.3.4" "1.2.3.5" "1.2.3.6"
+    spam:store 1.2.3.4
+    spam:delete 1.2.3.4
+    spam:restore 1.2.3.4
+    spam:exists 1.2.3.4
+    spam:scan
 
+The `spam:scan` command allows you to delete IP-addresses that have expired.
 
 ## Support Package
 

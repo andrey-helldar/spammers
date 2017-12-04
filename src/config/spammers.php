@@ -1,16 +1,25 @@
 <?php
 
 return [
-    'connection' => null,
+    /**
+     * Connection name.
+     */
+    'connection'  => null,
 
-    'table'     => 'spammers',
+    /**
+     * Table name.
+     */
+    'table'       => 'spammers',
 
     /**
      * To activate the cache, specify the number of minutes.
      *
      * Default, false.
      */
-    'use_cache' => false,
+    'use_cache'   => false,
 
+    /**
+     * Excluded IP-addresses.
+     */
     'exclude_ips' => [],
 ];
