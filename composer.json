@@ -30,7 +30,10 @@
   "autoload": {
     "psr-4": {
       "Helldar\\Spammers\\": "src/"
-    }
+    },
+    "files": [
+      "src/helpers.php"
+    ]
   },
   "autoload-dev": {
     "psr-4": {
@@ -43,9 +46,6 @@
   "minimum-stability": "dev",
   "prefer-stable": true,
   "extra": {
-    "branch-alias": {
-      "dev-master": "1.0-dev"
-    },
     "laravel": {
       "providers": [
         "Helldar\\Spammers\\ServiceProvider"
