@@ -35,7 +35,7 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
             __DIR__ . '/config/settings.php' => config_path('spammers.php'),
         ]);
 
-        $this->loadMigrationsFrom(__DIR__ . '/migrations/2017_12_03_000000_create_spammers_table.php');
+        $this->loadMigrationsFrom(__DIR__ . '/migrations');
 
         if ($this->app->runningInConsole()) {
             $this->commands([
