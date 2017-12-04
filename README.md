@@ -51,9 +51,10 @@ Now, use `spammer()` helper and Artisan commands.
 * [Helpers](#helpers)
 * [Middleware](#middleware)
 * [Console Command](#console-command)
+* [Additional](#additional)
 
 
-#### Helpers
+### Helpers
 
 Store IP-address in a spam-table:
 
@@ -82,7 +83,7 @@ $schedule->command('spam:scan')
 ```
 
 
-##### Middleware
+### Middleware
 
 Next, add link to middleware in `$routeMiddleware` block in `app/Http/Kernel.php` file, and use him in `$middlewareGroups` blocks:
 
@@ -106,7 +107,7 @@ protected $routeMiddleware = [
 ```
 
 
-#### Console Command
+### Console Command
 
 This package maybe called in a console:
 
@@ -118,13 +119,21 @@ This package maybe called in a console:
 
 The `spam:scan` command allows you to delete IP-addresses that have expired.
 
+
+### Additional
+
+You can use a `Helldar\Spammers\Models\Spammer` model. His extended `Illuminate\Database\Eloquent\Model`.
+
+
 ## Support Package
 
 You can donate via [Yandex Money](https://money.yandex.ru/quickpay/shop-widget?account=410012608840929&quickpay=shop&payment-type-choice=on&mobile-payment-type-choice=on&writer=seller&targets=Andrey+Helldar%3A+Open+Source+Projects&targets-hint=&default-sum=&button-text=04&mail=on&successURL=), WebMoney (Z124862854284, R343524258966).
 
+
 ## Copyright and License
 
 Laravel Spammers was written by Andrey Helldar for the Laravel framework 5.4 or later, and is released under the MIT License. See the [LICENSE](LICENSE) file for details.
+
 
 ## Translation
 
