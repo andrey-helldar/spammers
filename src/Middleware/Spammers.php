@@ -2,8 +2,6 @@
 
 namespace Helldar\Spammers\Middleware;
 
-use Helldar\Spammers\Facade\Spammer;
-
 class Spammers
 {
     /**
