@@ -16,6 +16,9 @@ class Spammer extends Model
      */
     protected $dates = ['deleted_at'];
 
+    /**
+     * @var array
+     */
     protected $casts = [
         'ip' => 'string',
     ];
@@ -27,11 +30,31 @@ class Spammer extends Model
      */
     protected $fillable = ['ip'];
 
+    /**
+     * Spammer constructor.
+     *
+     * @param array $attributes
+     */
     public function __construct(array $attributes = [])
     {
-        $this->connection = config('spammers.connection', null);
-        $this->table      = config('spammers.table', 'spammers');
+        $this->table = config('spammers.table', 'spammers');
+
+        $this->readConnection();
 
         parent::__construct($attributes);
+    }
+
+    /**
+     * Reading a connection name from config file.
+     */
+    private function readConnection()
+    {
+        if ($connection = config('spammers.connection', null)) {
+            $this->setConnection($connection);
+        }
+        else {
+            $connection = config('database.default', 'mysql');
+            $this->setConnection($connection);
+        }
     }
 }
