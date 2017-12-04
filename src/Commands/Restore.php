@@ -2,23 +2,32 @@
 
 namespace Helldar\Spammers\Commands;
 
+use Helldar\Spammers\Traits\Spammer;
+use Helldar\Spammers\Traits\ValidateIP;
 use Illuminate\Console\Command;
 
 class Restore extends Command
 {
+    use ValidateIP, Spammer;
+
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'spam:restore';
+    protected $signature = 'spam:restore {ip : IP-address of spammer}';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Restore IP-address in a spam-table.';
+    protected $description = 'Restore IP-address in spammers table';
+
+    /**
+     * @var string
+     */
+    protected $ip;
 
     /**
      * Create a new command instance.
@@ -37,6 +46,16 @@ class Restore extends Command
      */
     public function handle()
     {
-        return spammer('127.0.0.1')->restore();
+        $this->ip = trim($this->argument('ip'));
+
+        if ($errors = $this->isIpValidateError()) {
+            $this->errorsInConsole($errors);
+            return;
+        }
+
+        $result = $this->spammer()
+            ->restore();
+
+        $this->info($result);
     }
 }

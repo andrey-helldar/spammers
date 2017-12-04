@@ -2,6 +2,7 @@
 
 namespace Helldar\Spammers\Facade;
 
+use Carbon\Carbon;
 use Helldar\Spammers\Models\Spammer as SpammerModel;
 use Helldar\Spammers\Rules\IpAddressExists;
 use Helldar\Spammers\Rules\IpAddressNotExists;
@@ -21,14 +22,35 @@ class Spammer
     protected $errors = null;
 
     /**
+     * @var null|timestamp
+     */
+    protected $expired_at = null;
+
+    /**
      * Spammer constructor.
      *
      * @param string $ip
      */
     public function __construct($ip = null)
     {
-        $this->errors = $this->isErrorValidation();
         $this->ip     = $ip;
+        $this->errors = $this->isErrorValidation();
+    }
+
+    /**
+     * Store expiered time to current IP-address.
+     *
+     * @param null $hours
+     *
+     * @return $this
+     */
+    public function expire($hours = null)
+    {
+        if ($hours) {
+            $this->expired_at = Carbon::now()->addHours((int)$hours);
+        }
+
+        return $this;
     }
 
     /**
@@ -43,7 +65,7 @@ class Spammer
         }
 
         return SpammerModel::withTrashed()
-            ->firstOrCreate(['ip' => $this->ip]);
+            ->firstOrCreate(['ip' => $this->ip], ['expired_at' => $this->expired_at]);
     }
 
     /**
@@ -57,7 +79,7 @@ class Spammer
             return $this->errors;
         }
 
-        if (new IpAddressNotExists($this->ip)) {
+        if ((new IpAddressNotExists($this->ip))->check()) {
             return "IP-address {$this->ip} is not exists!";
         }
 
@@ -77,11 +99,15 @@ class Spammer
             return $this->errors;
         }
 
-        if (new IpAddressNotExists($this->ip)) {
+        $is_not_exists = (new IpAddressNotExists($this->ip))
+            ->onlyTrashed()
+            ->check();
+
+        if ($is_not_exists) {
             return "IP-address {$this->ip} is not exists!";
         }
 
-        return SpammerModel::withTrashed()
+        return SpammerModel::onlyTrashed()
             ->whereIp($this->ip)
             ->restore();
     }
@@ -97,11 +123,11 @@ class Spammer
             $key = str_slug('spammers_exists_' . $this->ip);
 
             return Cache::remember($key, (int)$time, function() {
-                return (new IpAddressExists($this->ip));
+                return (new IpAddressExists($this->ip))->check();
             });
         }
 
-        return (new IpAddressExists($this->ip));
+        return (new IpAddressExists($this->ip))->check();
     }
 
     /**

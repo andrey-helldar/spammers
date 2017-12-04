@@ -29,7 +29,7 @@ class Spammer extends Model
      *
      * @var array
      */
-    protected $fillable = ['ip'];
+    protected $fillable = ['ip', 'expired_at'];
 
     /**
      * Spammer constructor.
@@ -38,8 +38,8 @@ class Spammer extends Model
      */
     public function __construct(array $attributes = [])
     {
-        $this->setConnection();
-        $this->setTable();
+        $this->setConnectionName();
+        $this->setTableName();
 
         parent::__construct($attributes);
     }

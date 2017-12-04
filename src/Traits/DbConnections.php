@@ -17,7 +17,7 @@ trait DbConnections
     /**
      * Set a connection name.
      */
-    public function setConnection()
+    public function setConnectionName()
     {
         $this->connection = config('spammers.connection', config('database.default', 'mysql'));
     }
@@ -25,7 +25,7 @@ trait DbConnections
     /**
      * Set a table name.
      */
-    public function setTable()
+    public function setTableName()
     {
         $this->table = config('spammers.table', 'spammers');
     }

@@ -14,8 +14,8 @@ class CreateSpammersTable extends Migration
      */
     public function __construct()
     {
-        $this->setConnection();
-        $this->setTable();
+        $this->setConnectionName();
+        $this->setTableName();
     }
 
     /**
@@ -30,6 +30,7 @@ class CreateSpammersTable extends Migration
                 $table->increments('id');
 
                 $table->string('ip');
+                $table->timestamp('expired_at')->nullable();
 
                 $table->timestamps();
                 $table->softDeletes();
