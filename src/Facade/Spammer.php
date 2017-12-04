@@ -58,7 +58,7 @@ class Spammer
     /**
      * Store IP-address in a spam-table.
      *
-     * @return array|null|string
+     * @return null|array|Helldar\Spammers\Models\Spammer
      */
     public function store()
     {
@@ -73,7 +73,7 @@ class Spammer
     /**
      * Delete IP-address from a spam-table.
      *
-     * @return array|null|string
+     * @return null|string
      */
     public function delete()
     {
@@ -93,7 +93,7 @@ class Spammer
     /**
      * Restore IP-address from a spam-table.
      *
-     * @return array|null|string
+     * @return null|string|Helldar\Spammers\Models\Spammer
      */
     public function restore()
     {
@@ -117,7 +117,7 @@ class Spammer
     /**
      * Check exists IP-address in a spam-table.
      *
-     * @return \Helldar\Spammers\Rules\IpAddressExists
+     * @return bool
      */
     public function exists()
     {
