@@ -1,20 +1,22 @@
 <?php
 
+use Helldar\Spammers\Traits\DbConnections;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
 class CreateSpammersTable extends Migration
 {
-    /**
-     * @var null
-     */
-    protected $connection = null;
+    use DbConnections;
 
     /**
-     * @var string
+     * CreateSpammersTable constructor.
      */
-    protected $table = 'spammers';
+    public function __construct()
+    {
+        $this->setConnection();
+        $this->setTable();
+    }
 
     /**
      * Run the migrations.

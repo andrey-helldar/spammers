@@ -2,12 +2,13 @@
 
 namespace Helldar\Spammers\Models;
 
+use Helldar\Spammers\Traits\DbConnections;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Spammer extends Model
 {
-    use SoftDeletes;
+    use SoftDeletes, DbConnections;
 
     /**
      * The attributes that should be mutated to dates.
@@ -37,24 +38,9 @@ class Spammer extends Model
      */
     public function __construct(array $attributes = [])
     {
-        $this->table = config('spammers.table', 'spammers');
-
-        $this->readConnection();
+        $this->setConnection();
+        $this->setTable();
 
         parent::__construct($attributes);
-    }
-
-    /**
-     * Reading a connection name from config file.
-     */
-    private function readConnection()
-    {
-        if ($connection = config('spammers.connection', null)) {
-            $this->setConnection($connection);
-        }
-        else {
-            $connection = config('database.default', 'mysql');
-            $this->setConnection($connection);
-        }
     }
 }
