@@ -27,8 +27,6 @@ class IpAddressExists
     }
 
     /**
-     * @param null|string $ip
-     *
      * @return bool
      */
     public function check()

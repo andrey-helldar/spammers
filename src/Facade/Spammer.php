@@ -24,7 +24,7 @@ class Spammer
     protected $errors = null;
 
     /**
-     * @var null|timestamp
+     * @var null|string
      */
     protected $expired_at = null;
 
@@ -35,12 +35,12 @@ class Spammer
      */
     public function __construct($ip = null)
     {
-        $this->ip = $ip;
+        $this->ip     = $ip;
         $this->errors = $this->isIpValidateError();
     }
 
     /**
-     * Store expiered time to current IP-address.
+     * Store expired time to current IP-address.
      *
      * @param null $hours
      *
@@ -49,7 +49,8 @@ class Spammer
     public function expire($hours = null)
     {
         if ($hours) {
-            $this->expired_at = Carbon::now()->addHours((int) $hours);
+            $this->expired_at = Carbon::now()
+                ->addHours((int)$hours);
         }
 
         return $this;
@@ -58,7 +59,7 @@ class Spammer
     /**
      * Store IP-address in a spam-table.
      *
-     * @return null|array|Helldar\Spammers\Models\Spammer
+     * @return null|array|\Helldar\Spammers\Models\Spammer
      */
     public function store()
     {
@@ -73,7 +74,7 @@ class Spammer
     /**
      * Delete IP-address from a spam-table.
      *
-     * @return null|string
+     * @return null|array|string|\Helldar\Spammers\Models\Spammer
      */
     public function delete()
     {
@@ -93,7 +94,7 @@ class Spammer
     /**
      * Restore IP-address from a spam-table.
      *
-     * @return null|string|Helldar\Spammers\Models\Spammer
+     * @return null|array|string|\Helldar\Spammers\Models\Spammer
      */
     public function restore()
     {
@@ -122,9 +123,9 @@ class Spammer
     public function exists()
     {
         if ($time = config('spammers.use_cache', false)) {
-            $key = str_slug('spammers_exists_'.$this->ip);
+            $key = str_slug('spammers_exists_' . $this->ip);
 
-            return Cache::remember($key, (int) $time, function () {
+            return Cache::remember($key, (int)$time, function() {
                 return (new IpAddressExists($this->ip))->check();
             });
         }
