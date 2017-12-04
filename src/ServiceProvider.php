@@ -33,7 +33,7 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
     public function boot()
     {
         $this->publishes([
-            __DIR__ . '/config/settings.php' => config_path('spammers.php'),
+            __DIR__ . '/config/spammers.php' => config_path('spammers.php'),
         ]);
 
         $this->loadMigrationsFrom(__DIR__ . '/migrations');
