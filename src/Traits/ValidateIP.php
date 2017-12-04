@@ -25,7 +25,7 @@ trait ValidateIP
     {
         $validator = \Validator::make(['ip' => $this->ip], [
             'url' => 'url',
-            'ip'  => [
+            'ip' => [
                 'required',
                 'ipv4',
                 Rule::notIn(config('spammers_settings.protected_ips', [])),
@@ -52,7 +52,7 @@ trait ValidateIP
             return;
         }
 
-        foreach (array_values((array)$errors) as $error) {
+        foreach (array_values((array) $errors) as $error) {
             $this->errorsInConsole($error);
         }
     }

@@ -21,7 +21,7 @@ class SpammerAccess extends Model
      * @var array
      */
     protected $casts = [
-        'ip'  => 'string',
+        'ip' => 'string',
         'url' => 'string',
     ];
 
