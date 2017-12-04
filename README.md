@@ -4,6 +4,21 @@ Simple package to prevent accessing of spammers to Laravel application.
 
 ![spammers](https://user-images.githubusercontent.com/10347617/33530091-1cba8f1a-d88b-11e7-8d1d-eb7a924199d2.png)
 
+<p align="center">
+<a href="https://travis-ci.org/andrey-helldar/spammers"><img src="https://travis-ci.org/andrey-helldar/spammers.svg?branch=master&style=flat-square" alt="Build Status" /></a>
+<a href="https://packagist.org/packages/andrey-helldar/spammers"><img src="https://img.shields.io/packagist/dt/andrey-helldar/spammers.svg?style=flat-square" alt="Total Downloads" /></a>
+<a href="https://packagist.org/packages/andrey-helldar/spammers"><img src="https://poser.pugx.org/andrey-helldar/spammers/v/stable?format=flat-square" alt="Latest Stable Version" /></a>
+<a href="https://packagist.org/packages/andrey-helldar/spammers"><img src="https://poser.pugx.org/andrey-helldar/spammers/v/unstable?format=flat-square" alt="Latest Unstable Version" /></a>
+<a href="https://github.com/andrey-helldar/spammers"><img src="https://poser.pugx.org/andrey-helldar/spammers/license?format=flat-square" alt="License" /></a>
+</p>
+
+
+<p align="center">
+<a href="https://github.com/andrey-helldar/spammers"><img src="https://img.shields.io/scrutinizer/g/andrey-helldar/spammers.svg?style=flat-square" alt="Quality Score" /></a>
+<a href="https://styleci.io/repos/112966311"><img src="https://styleci.io/repos/112966311/shield" alt="StyleCI" /></a>
+<a href="https://php-eye.com/package/andrey-helldar/spammers"><img src="https://php-eye.com/badge/andrey-helldar/spammers/tested.svg?style=flat" alt="PHP-Eye" /></a>
+</p>
+
 ## Installation
 
 To get the latest version of this package, simply require the project using [Composer](https://getcomposer.org/):
