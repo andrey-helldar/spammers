@@ -6,11 +6,13 @@ use Carbon\Carbon;
 use Helldar\Spammers\Models\Spammer as SpammerModel;
 use Helldar\Spammers\Rules\IpAddressExists;
 use Helldar\Spammers\Rules\IpAddressNotExists;
+use Helldar\Spammers\Traits\ValidateIP;
 use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\Facades\Validator;
 
 class Spammer
 {
+    use ValidateIP;
+
     /**
      * @var null|string
      */
@@ -34,7 +36,7 @@ class Spammer
     public function __construct($ip = null)
     {
         $this->ip     = $ip;
-        $this->errors = $this->isErrorValidation();
+        $this->errors = $this->isIpValidateError();
     }
 
     /**
@@ -128,37 +130,5 @@ class Spammer
         }
 
         return (new IpAddressExists($this->ip))->check();
-    }
-
-    /**
-     * Validate a IP-address.
-     *
-     * @return null|string|array
-     */
-    private function isErrorValidation()
-    {
-        $validator = Validator::make(['ip' => $this->ip], [
-            'ip' => 'required|ipv4',
-        ]);
-
-        if ($validator->fails()) {
-            return $validator->errors();
-        }
-
-        if ($this->isExcludedIp()) {
-            return "IP-address {$this->ip} founded in a excluded settings!";
-        }
-
-        return null;
-    }
-
-    /**
-     * Check in excluded IP-addresses.
-     *
-     * @return bool
-     */
-    private function isExcludedIp()
-    {
-        return in_array($this->ip, config('spammers.exclude_ips'));
     }
 }

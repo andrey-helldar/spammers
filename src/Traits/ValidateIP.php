@@ -2,6 +2,8 @@
 
 namespace Helldar\Spammers\Traits;
 
+use Illuminate\Validation\Rule;
+
 trait ValidateIP
 {
     /**
@@ -17,8 +19,13 @@ trait ValidateIP
     public function isIpValidateError()
     {
         $validator = \Validator::make(['ip' => $this->ip], [
-            'ip' => 'required|ipv4',
-        ]);
+            'ip' => [
+                'required',
+                'ipv4',
+                Rule::notIn(config('spammers_settings.protected_ips', [])),
+                Rule::notIn(config('spammers.exclude_ips', [])),
+            ],
+        ], $this->messages());
 
         if ($validator->fails()) {
             return $validator->errors();
@@ -40,5 +47,17 @@ trait ValidateIP
         foreach (array_values((array)$errors) as $error) {
             $this->errorsInConsole($error);
         }
+    }
+
+    /**
+     * Messages for validation.
+     *
+     * @return array
+     */
+    private function messages()
+    {
+        return [
+            'not_in' => "IP-address {$this->ip} is protected!",
+        ];
     }
 }
