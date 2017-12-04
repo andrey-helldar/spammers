@@ -1,7 +1,7 @@
 <?php
 
 return [
-    /**
+    /*
      * Protected IP-addresses.
      */
     'protected_ips' => [

@@ -50,11 +50,13 @@ class Exists extends Command
 
         if ($errors = $this->isIpValidateError()) {
             $this->errorsInConsole($errors);
+
             return;
         }
 
         if ($is_exist = $this->spammer()->exists()) {
             $this->info("IP-address {$this->ip} is exists.");
+
             return;
         }
 

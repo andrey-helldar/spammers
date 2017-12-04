@@ -16,6 +16,6 @@ trait Spammer
      */
     public function spammer()
     {
-        return (new SpammerFacade($this->ip));
+        return new SpammerFacade($this->ip);
     }
 }
