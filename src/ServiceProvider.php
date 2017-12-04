@@ -23,11 +23,11 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
     public function register()
     {
         $this->mergeConfigFrom(
-            __DIR__ . '/config/spammers.php', 'spammers'
+            __DIR__.'/config/spammers.php', 'spammers'
         );
 
         $this->mergeConfigFrom(
-            __DIR__ . '/config/settings.php', 'spammers_settings'
+            __DIR__.'/config/settings.php', 'spammers_settings'
         );
     }
 
@@ -37,10 +37,10 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
     public function boot()
     {
         $this->publishes([
-            __DIR__ . '/config/spammers.php' => config_path('spammers.php'),
+            __DIR__.'/config/spammers.php' => config_path('spammers.php'),
         ]);
 
-        $this->loadMigrationsFrom(__DIR__ . '/migrations');
+        $this->loadMigrationsFrom(__DIR__.'/migrations');
 
         if ($this->app->runningInConsole()) {
             $this->commands([

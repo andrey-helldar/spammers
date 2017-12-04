@@ -40,13 +40,11 @@ class IpAddressNotExists
             $spammer = Spammer::withTrashed()
                 ->whereIp($this->ip)
                 ->first();
-        }
-        elseif ($this->only_trashed) {
+        } elseif ($this->only_trashed) {
             $spammer = Spammer::onlyTrashed()
                 ->whereIp($this->ip)
                 ->first();
-        }
-        else {
+        } else {
             $spammer = Spammer::whereIp($this->ip)
                 ->first();
         }

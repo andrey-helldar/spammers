@@ -26,7 +26,7 @@ class CreateSpammersTable extends Migration
     public function up()
     {
         Schema::connection($this->connection)
-            ->create($this->table, function(Blueprint $table) {
+            ->create($this->table, function (Blueprint $table) {
                 $table->increments('id');
 
                 $table->string('ip');

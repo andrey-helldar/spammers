@@ -50,6 +50,7 @@ class Delete extends Command
 
         if ($errors = $this->isIpValidateError()) {
             $this->errorsInConsole($errors);
+
             return;
         }
 

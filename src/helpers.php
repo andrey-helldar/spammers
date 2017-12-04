@@ -8,6 +8,6 @@ if (!function_exists('spammer')) {
      */
     function spammer($ip = null)
     {
-        return (new \Helldar\Spammers\Facade\Spammer($ip));
+        return new \Helldar\Spammers\Facade\Spammer($ip);
     }
 }

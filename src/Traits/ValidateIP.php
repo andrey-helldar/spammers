@@ -41,10 +41,11 @@ trait ValidateIP
     {
         if (gettype($errors) !== 'array' && gettype($errors) !== 'object') {
             $this->error($errors);
+
             return;
         }
 
-        foreach (array_values((array)$errors) as $error) {
+        foreach (array_values((array) $errors) as $error) {
             $this->errorsInConsole($error);
         }
     }
