@@ -2,13 +2,12 @@
 
 namespace Helldar\Spammers\Commands;
 
-use Helldar\Spammers\Traits\Spammer;
 use Helldar\Spammers\Traits\ValidateIP;
 use Illuminate\Console\Command;
 
 class Exists extends Command
 {
-    use ValidateIP, Spammer;
+    use ValidateIP;
 
     /**
      * The name and signature of the console command.
@@ -54,7 +53,7 @@ class Exists extends Command
             return;
         }
 
-        if ($is_exist = $this->spammer()->exists()) {
+        if ($is_exist = \spammer($this->ip)->exists()) {
             $this->info("IP-address {$this->ip} is exists.");
 
             return;

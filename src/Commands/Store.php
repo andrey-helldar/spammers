@@ -2,13 +2,12 @@
 
 namespace Helldar\Spammers\Commands;
 
-use Helldar\Spammers\Traits\Spammer;
 use Helldar\Spammers\Traits\ValidateIP;
 use Illuminate\Console\Command;
 
 class Store extends Command
 {
-    use ValidateIP, Spammer;
+    use ValidateIP;
 
     /**
      * The name and signature of the console command.
@@ -51,8 +50,8 @@ class Store extends Command
      */
     public function handle()
     {
-        $this->ip = trim($this->argument('ip'));
-        $this->expired = (int) $this->option('expired');
+        $this->ip      = trim($this->argument('ip'));
+        $this->expired = (int)$this->option('expired');
 
         if ($errors = $this->isIpValidateError()) {
             $this->errorsInConsole($errors);
@@ -60,7 +59,7 @@ class Store extends Command
             return;
         }
 
-        $result = $this->spammer()
+        $result = \spammer($this->ip)
             ->expire($this->expired)
             ->store();
 

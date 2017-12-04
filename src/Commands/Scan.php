@@ -4,13 +4,10 @@ namespace Helldar\Spammers\Commands;
 
 use Carbon\Carbon;
 use Helldar\Spammers\Models\Spammer as SpammerModel;
-use Helldar\Spammers\Traits\Spammer as SpammerTrait;
 use Illuminate\Console\Command;
 
 class Scan extends Command
 {
-    use SpammerTrait;
-
     /**
      * The name and signature of the console command.
      *

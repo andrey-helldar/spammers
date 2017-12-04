@@ -2,13 +2,12 @@
 
 namespace Helldar\Spammers\Commands;
 
-use Helldar\Spammers\Traits\Spammer;
 use Helldar\Spammers\Traits\ValidateIP;
 use Illuminate\Console\Command;
 
 class Delete extends Command
 {
-    use ValidateIP, Spammer;
+    use ValidateIP;
 
     /**
      * The name and signature of the console command.
@@ -54,7 +53,7 @@ class Delete extends Command
             return;
         }
 
-        $result = $this->spammer()->delete();
+        $result = \spammer($this->ip)->delete();
 
         $this->info($result);
     }

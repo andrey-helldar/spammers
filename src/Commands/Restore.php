@@ -2,13 +2,12 @@
 
 namespace Helldar\Spammers\Commands;
 
-use Helldar\Spammers\Traits\Spammer;
 use Helldar\Spammers\Traits\ValidateIP;
 use Illuminate\Console\Command;
 
 class Restore extends Command
 {
-    use ValidateIP, Spammer;
+    use ValidateIP;
 
     /**
      * The name and signature of the console command.
@@ -54,8 +53,7 @@ class Restore extends Command
             return;
         }
 
-        $result = $this->spammer()
-            ->restore();
+        $result = \spammer($this->ip)->restore();
 
         $this->info($result);
     }
