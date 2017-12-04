@@ -18,7 +18,7 @@ class Spammers
     {
         $is_spammer = (new Spammer($request->getClientIp()))->exists();
 
-        if ($request->isJson() || $request->wantsJson()) {
+        if ($is_spammer && ($request->isJson() || $request->wantsJson())) {
             return response()->json('Current IP-address founded in spam base.', 403);
         }
 
