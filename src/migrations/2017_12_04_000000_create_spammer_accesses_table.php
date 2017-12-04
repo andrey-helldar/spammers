@@ -5,7 +5,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSpammersTable extends Migration
+class CreateSpammerAccessesTable extends Migration
 {
     use DbConnections;
 
@@ -15,7 +15,7 @@ class CreateSpammersTable extends Migration
     public function __construct()
     {
         $this->setConnectionName();
-        $this->setTableName();
+        $this->setTableAccessName();
     }
 
     /**
@@ -30,7 +30,7 @@ class CreateSpammersTable extends Migration
                 $table->increments('id');
 
                 $table->ipAddress('ip');
-                $table->timestamp('expired_at')->nullable();
+                $table->string('url');
 
                 $table->timestamps();
                 $table->softDeletes();

@@ -48,13 +48,14 @@ Now, use `spammer()` helper and Artisan commands.
 
 ## Documentation
 
-* [Helpers](#helpers)
+* [Helpers Store](#helpers-store)
+* [Helpers Accessing](#helpers-accessing)
 * [Middleware](#middleware)
 * [Console Command](#console-command)
 * [Additional](#additional)
 
 
-### Helpers
+### Helpers Store
 
 Store IP-address in a spam-table:
 
@@ -81,6 +82,26 @@ Set up a schedule to exclude IP addresses that have expired from the spam table.
 $schedule->command('spam:scan')
     ->hourly();
 ```
+
+
+### Helpers Store
+
+To save an IP address with the URL in the database, use the helper `spammer_access()`:
+
+    spammer_access()
+        ->ip($ip = null)
+        ->url($url = null)
+        ->store();
+
+Ban when attempts to get pages with errors exceed a given number.
+
+Example:
+
+* When the number of attempts reaches `100` - ban for `24` hours.
+* When the number of attempts reaches `300` - ban for `72` hours.
+* When the number of attempts reaches `500` - `permanent ban`.
+
+Default, `permanent ban`.
 
 
 ### Middleware

@@ -15,6 +15,11 @@ trait DbConnections
     protected $table = null;
 
     /**
+     * @var null
+     */
+    protected $table_access = null;
+
+    /**
      * Set a connection name.
      */
     public function setConnectionName()
@@ -28,5 +33,13 @@ trait DbConnections
     public function setTableName()
     {
         $this->table = config('spammers.table', 'spammers');
+    }
+
+    /**
+     * Set a table name for logging.
+     */
+    public function setTableAccessName()
+    {
+        $this->table_access = config('spammers.table_access', 'spammer_access');
     }
 }

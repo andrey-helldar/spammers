@@ -12,6 +12,11 @@ trait ValidateIP
     protected $ip = null;
 
     /**
+     * @var null|string|array
+     */
+    protected $errors = null;
+
+    /**
      * Validation IP-address.
      *
      * @return \Illuminate\Support\MessageBag|null
@@ -19,11 +24,13 @@ trait ValidateIP
     public function isIpValidateError()
     {
         $validator = \Validator::make(['ip' => $this->ip], [
-            'ip' => [
+            'url' => 'url',
+            'ip'  => [
                 'required',
                 'ipv4',
                 Rule::notIn(config('spammers_settings.protected_ips', [])),
                 Rule::notIn(config('spammers.exclude_ips', [])),
+
             ],
         ], $this->messages());
 
@@ -45,7 +52,7 @@ trait ValidateIP
             return;
         }
 
-        foreach (array_values((array) $errors) as $error) {
+        foreach (array_values((array)$errors) as $error) {
             $this->errorsInConsole($error);
         }
     }
