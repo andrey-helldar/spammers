@@ -29,7 +29,7 @@ return [
     'ban_when_access' => [
         100 => 24,
         300 => 72,
-        500 => null
+        500 => null,
     ],
 
     /*
