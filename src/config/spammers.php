@@ -14,7 +14,7 @@ return [
     /*
      * Table name for store accessing when get error pages.
      */
-    'table_access' => 'spammer_accesses',
+    'table_access' => 'spammer_access',
 
     /*
      * Ban when attempts to get pages with errors exceed a given number.
