@@ -26,7 +26,7 @@ class CreateSpammerAccessesTable extends Migration
     public function up()
     {
         Schema::connection($this->connection)
-            ->create($this->table, function (Blueprint $table) {
+            ->create($this->table_access, function (Blueprint $table) {
                 $table->increments('id');
 
                 $table->ipAddress('ip');
@@ -45,6 +45,6 @@ class CreateSpammerAccessesTable extends Migration
     public function down()
     {
         Schema::connection($this->connection)
-            ->dropIfExists($this->table);
+            ->dropIfExists($this->table_access);
     }
 }
