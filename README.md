@@ -92,7 +92,7 @@ $schedule->command('spam:scan')
 ```
 
 
-### Helpers Store
+### Helpers Accessing
 
 To save an IP address with the URL in the database, use the helper `spammer_access()`:
 
