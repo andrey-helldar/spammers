@@ -7,16 +7,6 @@ trait DbConnections
     /**
      * @var null
      */
-    protected $connection = null;
-
-    /**
-     * @var string
-     */
-    protected $table = null;
-
-    /**
-     * @var null
-     */
     protected $table_access = null;
 
     /**
