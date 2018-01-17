@@ -24,11 +24,6 @@ class Exists extends Command
     protected $description = 'Check exists IP-address in spam table.';
 
     /**
-     * @var string
-     */
-    protected $ip;
-
-    /**
      * Create a new command instance.
      *
      * Clearing constructor.

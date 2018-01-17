@@ -24,11 +24,6 @@ class Restore extends Command
     protected $description = 'Restore IP-address in spammers table';
 
     /**
-     * @var string
-     */
-    protected $ip;
-
-    /**
      * Create a new command instance.
      *
      * Clearing constructor.

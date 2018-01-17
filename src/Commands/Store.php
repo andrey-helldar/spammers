@@ -24,11 +24,6 @@ class Store extends Command
     protected $description = 'Add a new IP-address into spammers table';
 
     /**
-     * @var string
-     */
-    protected $ip;
-
-    /**
      * @var int
      */
     protected $expired = null;

@@ -24,11 +24,6 @@ class Delete extends Command
     protected $description = 'Remove IP-address from spammers table';
 
     /**
-     * @var string
-     */
-    protected $ip;
-
-    /**
      * Create a new command instance.
      *
      * Clearing constructor.
