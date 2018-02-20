@@ -101,12 +101,6 @@ Check exists IP-address in a spam-table:
     
     spammer('1.2.3.4')->exists();
 
-Set up a schedule to exclude IP addresses that have expired from the spam table. To do this, add the following rules in the `schedule()` method of the `Console/Kernel.php` file:
-
-```php
-$schedule->command('spam:scan')->hourly();
-```
-
 
 ### Helpers Accessing
 
@@ -172,13 +166,13 @@ protected $middleware = [
 
 This package maybe called in a console:
 
+    spam:amnesty
     spam:store 1.2.3.4
     spam:delete 1.2.3.4
     spam:restore 1.2.3.4
     spam:exists 1.2.3.4
-    spam:scan
 
-The `spam:scan` command allows you to delete IP-addresses that have expired.
+The `spam:amnesty` command allows you to delete IP-addresses that have expired.
 
 
 ### Additional
@@ -206,6 +200,16 @@ public function report(Exception $exception)
         ->store();
 
     parent::report($exception);
+}
+```
+
+And add a rule to the `schedule()` method of the `app/Console/Kernel.php` file:
+
+```php
+protected function schedule(Schedule $schedule)
+{
+    $schedule->command('spam:amnesty')
+        ->everyThirtyMinutes();
 }
 ```
 
