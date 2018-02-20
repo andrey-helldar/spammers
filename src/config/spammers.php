@@ -4,17 +4,20 @@ return [
     /*
      * Connection name.
      */
-    'connection'      => null,
+
+    'connection' => null,
 
     /*
      * Base table name.
      */
-    'table'           => 'spammers',
+
+    'table' => 'spammers',
 
     /*
      * Table name for store accessing when get error pages.
      */
-    'table_access'    => 'spammer_access',
+
+    'table_access' => 'spammer_access',
 
     /*
      * Ban when attempts to get pages with errors exceed a given number.
@@ -26,6 +29,7 @@ return [
      *
      * Default, permanent ban.
      */
+
     'ban_when_access' => [
         100 => 24,
         300 => 72,
@@ -37,10 +41,12 @@ return [
      *
      * Default, false.
      */
-    'use_cache'       => false,
+
+    'use_cache' => false,
 
     /*
      * Excluded IP-addresses.
      */
-    'exclude_ips'     => [],
+
+    'exclude_ips' => [],
 ];
