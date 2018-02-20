@@ -48,7 +48,7 @@ class Spammer
      */
     public function access()
     {
-        return (new SpammerAccess($this->ip));
+        return new SpammerAccess($this->ip);
     }
 
     /**

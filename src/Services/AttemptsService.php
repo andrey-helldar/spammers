@@ -30,7 +30,7 @@ class AttemptsService
      */
     public function __construct($ip = null)
     {
-        $this->ip     = $ip;
+        $this->ip = $ip;
         $this->period = (int) config('spammers.period', 24);
     }
 
@@ -96,7 +96,7 @@ class AttemptsService
 
         if ($attempts = $this->attemptsDb()) {
             $result = [];
-            $i      = -1;
+            $i = -1;
 
             foreach ($items as $key => $value) {
                 $i++;

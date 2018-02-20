@@ -6,7 +6,6 @@ use Helldar\Spammers\Commands\Amnesty;
 use Helldar\Spammers\Commands\Delete;
 use Helldar\Spammers\Commands\Exists;
 use Helldar\Spammers\Commands\Restore;
-use Helldar\Spammers\Commands\Scan;
 use Helldar\Spammers\Commands\Store;
 
 class ServiceProvider extends \Illuminate\Support\ServiceProvider
