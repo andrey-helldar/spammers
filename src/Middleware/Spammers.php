@@ -9,7 +9,7 @@ class Spammers
     /**
      * @var string
      */
-    private $message = 'Current IP-address founded in spam base';
+    private $message = 'Your IP address is contained in our spam database';
 
     /**
      * Handle an incoming request.
