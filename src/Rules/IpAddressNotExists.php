@@ -14,12 +14,12 @@ class IpAddressNotExists
     /**
      * @var bool
      */
-    protected $with_trashed = false;
+    protected $only_trashed = false;
 
     /**
      * @var bool
      */
-    protected $only_trashed = false;
+    protected $with_trashed = false;
 
     /**
      * IpAddressNotExists constructor.
@@ -40,11 +40,13 @@ class IpAddressNotExists
             $spammer = Spammer::withTrashed()
                 ->whereIp($this->ip)
                 ->first();
-        } elseif ($this->only_trashed) {
+        }
+        elseif ($this->only_trashed) {
             $spammer = Spammer::onlyTrashed()
                 ->whereIp($this->ip)
                 ->first();
-        } else {
+        }
+        else {
             $spammer = Spammer::whereIp($this->ip)
                 ->first();
         }
@@ -55,9 +57,9 @@ class IpAddressNotExists
     /**
      * @return $this
      */
-    public function withTrashed()
+    public function onlyTrashed()
     {
-        $this->with_trashed = true;
+        $this->only_trashed = true;
 
         return $this;
     }
@@ -65,9 +67,9 @@ class IpAddressNotExists
     /**
      * @return $this
      */
-    public function onlyTrashed()
+    public function withTrashed()
     {
-        $this->only_trashed = true;
+        $this->with_trashed = true;
 
         return $this;
     }

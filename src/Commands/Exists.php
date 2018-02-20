@@ -10,18 +10,18 @@ class Exists extends Command
     use ValidateIP;
 
     /**
-     * The name and signature of the console command.
-     *
-     * @var string
-     */
-    protected $signature = 'spam:exists {ip : IP-address of spammer}';
-
-    /**
      * The console command description.
      *
      * @var string
      */
     protected $description = 'Check exists IP-address in spam table.';
+
+    /**
+     * The name and signature of the console command.
+     *
+     * @var string
+     */
+    protected $signature = 'spam:exists {ip : IP-address of spammer}';
 
     /**
      * Create a new command instance.

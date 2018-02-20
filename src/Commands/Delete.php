@@ -10,18 +10,18 @@ class Delete extends Command
     use ValidateIP;
 
     /**
-     * The name and signature of the console command.
-     *
-     * @var string
-     */
-    protected $signature = 'spam:delete {ip : IP-address of spammer}';
-
-    /**
      * The console command description.
      *
      * @var string
      */
     protected $description = 'Remove IP-address from spammers table';
+
+    /**
+     * The name and signature of the console command.
+     *
+     * @var string
+     */
+    protected $signature = 'spam:delete {ip : IP-address of spammer}';
 
     /**
      * Create a new command instance.

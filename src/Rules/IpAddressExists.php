@@ -35,7 +35,8 @@ class IpAddressExists
             $spammer = Spammer::withTrashed()
                 ->whereIp($this->ip)
                 ->first();
-        } else {
+        }
+        else {
             $spammer = Spammer::whereIp($this->ip)
                 ->first();
         }

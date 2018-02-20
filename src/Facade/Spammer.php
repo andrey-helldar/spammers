@@ -19,18 +19,41 @@ class Spammer
     protected $expired_at = null;
 
     /**
-     * Get a IP-address.
+     * Delete IP-address from a spam-table.
      *
-     * @param null $ip
-     *
-     * @return mixed
+     * @return null|array|string|\Helldar\Spammers\Models\Spammer
      */
-    public function ip($ip = null)
+    public function delete()
     {
-        $this->ip = $ip;
-        $this->errors = $this->isIpValidateError();
+        if ($this->errors) {
+            return $this->errors;
+        }
 
-        return $this;
+        if ((new IpAddressNotExists($this->ip))->check()) {
+            return "IP-address {$this->ip} is not exists!";
+        }
+
+        return SpammerModel::withTrashed()
+            ->whereIp($this->ip)
+            ->delete();
+    }
+
+    /**
+     * Check exists IP-address in a spam-table.
+     *
+     * @return bool
+     */
+    public function exists()
+    {
+        if ($time = config('spammers.use_cache', false)) {
+            $key = str_slug('spammers_exists_' . $this->ip);
+
+            return Cache::remember($key, (int) $time, function () {
+                return (new IpAddressExists($this->ip))->check();
+            });
+        }
+
+        return (new IpAddressExists($this->ip))->check();
     }
 
     /**
@@ -51,38 +74,18 @@ class Spammer
     }
 
     /**
-     * Store IP-address in a spam-table.
+     * Get a IP-address.
      *
-     * @return null|array|\Helldar\Spammers\Models\Spammer|\Illuminate\Support\MessageBag
-     */
-    public function store()
-    {
-        if ($this->errors) {
-            return $this->errors;
-        }
-
-        return SpammerModel::withTrashed()
-            ->firstOrCreate(['ip' => $this->ip], ['expired_at' => $this->expired_at]);
-    }
-
-    /**
-     * Delete IP-address from a spam-table.
+     * @param null $ip
      *
-     * @return null|array|string|\Helldar\Spammers\Models\Spammer
+     * @return mixed
      */
-    public function delete()
+    public function ip($ip = null)
     {
-        if ($this->errors) {
-            return $this->errors;
-        }
+        $this->ip     = $ip;
+        $this->errors = $this->isIpValidateError();
 
-        if ((new IpAddressNotExists($this->ip))->check()) {
-            return "IP-address {$this->ip} is not exists!";
-        }
-
-        return SpammerModel::withTrashed()
-            ->whereIp($this->ip)
-            ->delete();
+        return $this;
     }
 
     /**
@@ -110,20 +113,17 @@ class Spammer
     }
 
     /**
-     * Check exists IP-address in a spam-table.
+     * Store IP-address in a spam-table.
      *
-     * @return bool
+     * @return null|array|\Helldar\Spammers\Models\Spammer|\Illuminate\Support\MessageBag
      */
-    public function exists()
+    public function store()
     {
-        if ($time = config('spammers.use_cache', false)) {
-            $key = str_slug('spammers_exists_'.$this->ip);
-
-            return Cache::remember($key, (int) $time, function () {
-                return (new IpAddressExists($this->ip))->check();
-            });
+        if ($this->errors) {
+            return $this->errors;
         }
 
-        return (new IpAddressExists($this->ip))->check();
+        return SpammerModel::withTrashed()
+            ->firstOrCreate(['ip' => $this->ip], ['expired_at' => $this->expired_at]);
     }
 }

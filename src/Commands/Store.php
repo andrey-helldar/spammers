@@ -10,13 +10,6 @@ class Store extends Command
     use ValidateIP;
 
     /**
-     * The name and signature of the console command.
-     *
-     * @var string
-     */
-    protected $signature = 'spam:store {ip : IP-address of spammer} {--e|expired=0 : User Ban Expired Hours}';
-
-    /**
      * The console command description.
      *
      * @var string
@@ -27,6 +20,13 @@ class Store extends Command
      * @var int
      */
     protected $expired = null;
+
+    /**
+     * The name and signature of the console command.
+     *
+     * @var string
+     */
+    protected $signature = 'spam:store {ip : IP-address of spammer} {--e|expired=0 : User Ban Expired Hours}';
 
     /**
      * Create a new command instance.
@@ -43,7 +43,7 @@ class Store extends Command
      */
     public function handle()
     {
-        $this->ip = trim($this->argument('ip'));
+        $this->ip      = trim($this->argument('ip'));
         $this->expired = (int) $this->option('expired');
 
         if ($errors = $this->isIpValidateError()) {

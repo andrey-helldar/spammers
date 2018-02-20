@@ -11,19 +11,19 @@ class SpammerAccess extends Model
     use SoftDeletes, DbConnections;
 
     /**
+     * @var array
+     */
+    protected $casts = [
+        'ip'  => 'string',
+        'url' => 'string',
+    ];
+
+    /**
      * The attributes that should be mutated to dates.
      *
      * @var array
      */
     protected $dates = ['deleted_at'];
-
-    /**
-     * @var array
-     */
-    protected $casts = [
-        'ip' => 'string',
-        'url' => 'string',
-    ];
 
     /**
      * The attributes that are mass assignable.

@@ -7,39 +7,14 @@ use Illuminate\Validation\Rule;
 trait ValidateIP
 {
     /**
-     * @var null|string
-     */
-    protected $ip = null;
-
-    /**
      * @var null|string|array
      */
     protected $errors = null;
 
     /**
-     * Validation IP-address.
-     *
-     * @return \Illuminate\Support\MessageBag|null
+     * @var null|string
      */
-    public function isIpValidateError()
-    {
-        $validator = \Validator::make(['ip' => $this->ip], [
-            'url' => 'url',
-            'ip' => [
-                'required',
-                'ipv4',
-                Rule::notIn(config('spammers_settings.protected_ips', [])),
-                Rule::notIn(config('spammers.exclude_ips', [])),
-
-            ],
-        ], $this->messages());
-
-        if ($validator->fails()) {
-            return $validator->errors();
-        }
-
-        return null;
-    }
+    protected $ip = null;
 
     /**
      * @param array $errors
@@ -55,6 +30,31 @@ trait ValidateIP
         foreach (array_values((array) $errors) as $error) {
             $this->errorsInConsole($error);
         }
+    }
+
+    /**
+     * Validation IP-address.
+     *
+     * @return \Illuminate\Support\MessageBag|null
+     */
+    public function isIpValidateError()
+    {
+        $validator = \Validator::make(['ip' => $this->ip], [
+            'url' => 'url',
+            'ip'  => [
+                'required',
+                'ipv4',
+                Rule::notIn(config('spammers_settings.protected_ips', [])),
+                Rule::notIn(config('spammers.exclude_ips', [])),
+
+            ],
+        ], $this->messages());
+
+        if ($validator->fails()) {
+            return $validator->errors();
+        }
+
+        return null;
     }
 
     /**

@@ -9,13 +9,6 @@ use Illuminate\Console\Command;
 class Scan extends Command
 {
     /**
-     * The name and signature of the console command.
-     *
-     * @var string
-     */
-    protected $signature = 'spam:scan';
-
-    /**
      * The console command description.
      *
      * @var string
@@ -26,6 +19,13 @@ class Scan extends Command
      * @var int
      */
     protected $expired = null;
+
+    /**
+     * The name and signature of the console command.
+     *
+     * @var string
+     */
+    protected $signature = 'spam:scan';
 
     /**
      * Create a new command instance.

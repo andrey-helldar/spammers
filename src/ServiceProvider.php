@@ -18,29 +18,15 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
     protected $defer = false;
 
     /**
-     * Register the service provider.
-     */
-    public function register()
-    {
-        $this->mergeConfigFrom(
-            __DIR__.'/config/spammers.php', 'spammers'
-        );
-
-        $this->mergeConfigFrom(
-            __DIR__.'/config/settings.php', 'spammers_settings'
-        );
-    }
-
-    /**
      * Bootstrap the application events.
      */
     public function boot()
     {
         $this->publishes([
-            __DIR__.'/config/spammers.php' => config_path('spammers.php'),
+            __DIR__ . '/config/spammers.php' => config_path('spammers.php'),
         ]);
 
-        $this->loadMigrationsFrom(__DIR__.'/migrations');
+        $this->loadMigrationsFrom(__DIR__ . '/migrations');
 
         if ($this->app->runningInConsole()) {
             $this->commands([
@@ -51,5 +37,19 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
                 Scan::class,
             ]);
         }
+    }
+
+    /**
+     * Register the service provider.
+     */
+    public function register()
+    {
+        $this->mergeConfigFrom(
+            __DIR__ . '/config/spammers.php', 'spammers'
+        );
+
+        $this->mergeConfigFrom(
+            __DIR__ . '/config/settings.php', 'spammers_settings'
+        );
     }
 }

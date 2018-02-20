@@ -27,6 +27,20 @@ class SpammerAccess
     }
 
     /**
+     * Store URL-address into database.
+     *
+     * @return null|\Illuminate\Support\MessageBag|SpammerAccess
+     */
+    public function store()
+    {
+        if ($this->errors = $this->isIpValidateError()) {
+            return $this->errors;
+        }
+
+        return SpammerAccessModel::create(['ip' => $this->ip], ['url' => $this->url]);
+    }
+
+    /**
      * Validate URL-address.
      *
      * @param null $url
@@ -48,19 +62,5 @@ class SpammerAccess
         $this->url = $url;
 
         return $this;
-    }
-
-    /**
-     * Store URL-address into database.
-     *
-     * @return null|\Illuminate\Support\MessageBag|SpammerAccess
-     */
-    public function store()
-    {
-        if ($this->errors = $this->isIpValidateError()) {
-            return $this->errors;
-        }
-
-        return SpammerAccessModel::create(['ip' => $this->ip], ['url' => $this->url]);
     }
 }

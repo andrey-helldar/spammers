@@ -10,18 +10,18 @@ class Restore extends Command
     use ValidateIP;
 
     /**
-     * The name and signature of the console command.
-     *
-     * @var string
-     */
-    protected $signature = 'spam:restore {ip : IP-address of spammer}';
-
-    /**
      * The console command description.
      *
      * @var string
      */
     protected $description = 'Restore IP-address in spammers table';
+
+    /**
+     * The name and signature of the console command.
+     *
+     * @var string
+     */
+    protected $signature = 'spam:restore {ip : IP-address of spammer}';
 
     /**
      * Create a new command instance.
