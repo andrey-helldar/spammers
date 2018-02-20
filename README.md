@@ -53,6 +53,7 @@ Now, use `spammer()` helper and Artisan commands.
 * [Middleware](#middleware)
 * [Console Command](#console-command)
 * [Additional](#additional)
+* [Simple Using](#simple-using)
 
 
 ### Helpers Store
@@ -183,6 +184,32 @@ The `spam:scan` command allows you to delete IP-addresses that have expired.
 ### Additional
 
 You can use a `Helldar\Spammers\Models\Spammer` model. His extended `Illuminate\Database\Eloquent\Model`.
+
+### Simple Using
+
+You can specify globally in the attribute `$middleware` of the `Http/Kernel.php` file:
+```php
+protected $middleware = [
+    // ...
+    \Helldar\Spammers\Middleware\Spammers::class,    
+];
+```
+
+Next, in the `report()` method of file `app\Exceptions\Handler.php`, add the call to the `spammer()->access()` helper:
+
+```php
+public function report(Exception $exception)
+{
+    spammer(request()->ip())
+        ->access()
+        ->url(request()->fullUrl())
+        ->store();
+
+    parent::report($exception);
+}
+```
+
+Profit!
 
 
 ## Support Package
