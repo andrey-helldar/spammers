@@ -7,7 +7,6 @@ use Helldar\Spammers\Models\Spammer as SpammerModel;
 use Helldar\Spammers\Rules\IpAddressExists;
 use Helldar\Spammers\Rules\IpAddressNotExists;
 use Helldar\Spammers\Traits\ValidateIP;
-use Illuminate\Support\Facades\Cache;
 
 class Spammer
 {
@@ -17,6 +16,16 @@ class Spammer
      * @var null|string
      */
     protected $expired_at = null;
+
+    /**
+     * Spammer constructor.
+     *
+     * @param null $ip
+     */
+    public function __construct($ip = null)
+    {
+        $this->ip($ip);
+    }
 
     /**
      * Delete IP-address from a spam-table.
@@ -33,7 +42,8 @@ class Spammer
             return "IP-address {$this->ip} is not exists!";
         }
 
-        return SpammerModel::withTrashed()
+        return SpammerModel::query()
+            ->withTrashed()
             ->whereIp($this->ip)
             ->delete();
     }
@@ -45,14 +55,6 @@ class Spammer
      */
     public function exists()
     {
-        if ($time = config('spammers.use_cache', false)) {
-            $key = str_slug('spammers_exists_' . $this->ip);
-
-            return Cache::remember($key, (int) $time, function () {
-                return (new IpAddressExists($this->ip))->check();
-            });
-        }
-
         return (new IpAddressExists($this->ip))->check();
     }
 
@@ -66,8 +68,9 @@ class Spammer
     public function expire($hours = null)
     {
         if ($hours) {
-            $this->expired_at = Carbon::now()
-                ->addHours((int) $hours);
+            $hours = abs((int) $hours);
+
+            $this->expired_at = Carbon::now()->addHours($hours);
         }
 
         return $this;
@@ -82,7 +85,8 @@ class Spammer
      */
     public function ip($ip = null)
     {
-        $this->ip     = $ip;
+        $this->ip = $ip;
+
         $this->errors = $this->isIpValidateError();
 
         return $this;
@@ -107,7 +111,8 @@ class Spammer
             return "IP-address {$this->ip} is not exists!";
         }
 
-        return SpammerModel::onlyTrashed()
+        return SpammerModel::query()
+            ->onlyTrashed()
             ->whereIp($this->ip)
             ->restore();
     }
@@ -123,7 +128,11 @@ class Spammer
             return $this->errors;
         }
 
-        return SpammerModel::withTrashed()
-            ->firstOrCreate(['ip' => $this->ip], ['expired_at' => $this->expired_at]);
+        $ip         = $this->ip;
+        $expired_at = $this->expired_at;
+
+        return SpammerModel::query()
+            ->withTrashed()
+            ->firstOrCreate(compact('ip'), compact('expired_at'));
     }
 }
