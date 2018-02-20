@@ -15,6 +15,16 @@ class SpammerAccess
     protected $url;
 
     /**
+     * SpammerAccess constructor.
+     *
+     * @param null $ip
+     */
+    public function __construct($ip = null)
+    {
+        $this->ip($ip);
+    }
+
+    /**
      * @param null $ip
      *
      * @return $this

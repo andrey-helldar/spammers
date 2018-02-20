@@ -62,6 +62,10 @@ Store IP-address in a spam-table:
     spammer()
         ->ip('1.2.3.4')
         ->store();
+        
+    // or
+    
+    spammer('1.2.3.4')->store();
 
 
 Delete IP-address from a spam-table:
@@ -69,6 +73,10 @@ Delete IP-address from a spam-table:
     spammer()
         ->ip('1.2.3.4')
         ->delete();
+        
+    // or
+    
+    spammer('1.2.3.4')->delete();
 
 
 Restore IP-address from a spam-table:
@@ -76,6 +84,10 @@ Restore IP-address from a spam-table:
     spammer()
         ->ip('1.2.3.4')
         ->restore();
+        
+    // or
+    
+    spammer('1.2.3.4')->restore();
 
 
 Check exists IP-address in a spam-table:
@@ -83,21 +95,32 @@ Check exists IP-address in a spam-table:
     spammer()
         ->ip('1.2.3.4')
         ->exists();
+        
+    // or
+    
+    spammer('1.2.3.4')->exists();
 
 Set up a schedule to exclude IP addresses that have expired from the spam table. To do this, add the following rules in the `schedule()` method of the `Console/Kernel.php` file:
 
 ```php
-$schedule->command('spam:scan')
-    ->hourly();
+$schedule->command('spam:scan')->hourly();
 ```
 
 
 ### Helpers Accessing
 
-To save an IP address with the URL in the database, use the helper `spammer_access()`:
+To save an IP address with the URL in the database, use the helper `spammer()->access()`:
 
-    spammer_access()
+    spammer()
+        ->access()
         ->ip('1.2.3.4')
+        ->url('/foo/bar')
+        ->store();
+    
+    // or
+    
+    spammer('1.2.3.4')
+        ->access()
         ->url('/foo/bar')
         ->store();
 

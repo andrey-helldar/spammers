@@ -135,4 +135,12 @@ class Spammer
             ->withTrashed()
             ->firstOrCreate(compact('ip'), compact('expired_at'));
     }
+
+    /**
+     * @return \Helldar\Spammers\Facade\SpammerAccess
+     */
+    public function access()
+    {
+        return (new SpammerAccess($this->ip));
+    }
 }
