@@ -2,6 +2,7 @@
 
 namespace Helldar\Spammers;
 
+use Helldar\Spammers\Commands\Amnesty;
 use Helldar\Spammers\Commands\Delete;
 use Helldar\Spammers\Commands\Exists;
 use Helldar\Spammers\Commands\Restore;
@@ -30,11 +31,11 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
 
         if ($this->app->runningInConsole()) {
             $this->commands([
+                Amnesty::class,
                 Store::class,
                 Delete::class,
                 Restore::class,
                 Exists::class,
-                Scan::class,
             ]);
         }
     }
