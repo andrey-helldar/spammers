@@ -43,7 +43,7 @@ class Store extends Command
      */
     public function handle()
     {
-        $this->ip      = trim($this->argument('ip'));
+        $this->ip = trim($this->argument('ip'));
         $this->expired = (int) $this->option('expired');
 
         if ($errors = $this->isIpValidateError()) {

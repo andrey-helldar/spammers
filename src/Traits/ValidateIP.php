@@ -39,10 +39,10 @@ trait ValidateIP
      */
     public function isIpValidateError()
     {
-        $ip        = $this->ip;
+        $ip = $this->ip;
         $validator = \Validator::make(compact('ip'), [
             'url' => 'url',
-            'ip'  => [
+            'ip' => [
                 'required',
                 'ipv4',
                 Rule::notIn(config('spammers_settings.protected_ips', [])),

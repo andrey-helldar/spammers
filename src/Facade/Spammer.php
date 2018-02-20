@@ -128,7 +128,7 @@ class Spammer
             return $this->errors;
         }
 
-        $ip         = $this->ip;
+        $ip = $this->ip;
         $expired_at = $this->expired_at;
 
         return SpammerModel::query()
@@ -141,6 +141,6 @@ class Spammer
      */
     public function access()
     {
-        return (new SpammerAccess($this->ip));
+        return new SpammerAccess($this->ip);
     }
 }
