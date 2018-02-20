@@ -28,6 +28,30 @@ class Spammer
     }
 
     /**
+     * Get a IP-address.
+     *
+     * @param null $ip
+     *
+     * @return mixed
+     */
+    public function ip($ip = null)
+    {
+        $this->ip = $ip;
+
+        $this->errors = $this->isIpValidateError();
+
+        return $this;
+    }
+
+    /**
+     * @return \Helldar\Spammers\Facade\SpammerAccess
+     */
+    public function access()
+    {
+        return (new SpammerAccess($this->ip));
+    }
+
+    /**
      * Delete IP-address from a spam-table.
      *
      * @return null|array|string|\Helldar\Spammers\Models\Spammer
@@ -77,22 +101,6 @@ class Spammer
     }
 
     /**
-     * Get a IP-address.
-     *
-     * @param null $ip
-     *
-     * @return mixed
-     */
-    public function ip($ip = null)
-    {
-        $this->ip = $ip;
-
-        $this->errors = $this->isIpValidateError();
-
-        return $this;
-    }
-
-    /**
      * Restore IP-address from a spam-table.
      *
      * @return null|array|string|\Helldar\Spammers\Models\Spammer
@@ -134,13 +142,5 @@ class Spammer
         return SpammerModel::query()
             ->withTrashed()
             ->firstOrCreate(compact('ip'), compact('expired_at'));
-    }
-
-    /**
-     * @return \Helldar\Spammers\Facade\SpammerAccess
-     */
-    public function access()
-    {
-        return (new SpammerAccess($this->ip));
     }
 }
