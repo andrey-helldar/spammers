@@ -135,6 +135,14 @@ protected $routeMiddleware = [
 ];
 ```
 
+Or you can specify globally in the attribute `$middleware` of the `Http/Kernel.php` file:
+```php
+protected $middleware = [
+    // ...
+    \Helldar\Spammers\Middleware\Spammers::class,    
+];
+```
+
 
 ### Console Command
 
