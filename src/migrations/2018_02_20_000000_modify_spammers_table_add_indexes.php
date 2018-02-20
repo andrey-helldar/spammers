@@ -21,19 +21,6 @@ class ModifySpammersTableAddIndexes extends Migration
     }
 
     /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
-    public function down()
-    {
-        Schema::connection($this->connection)
-            ->table($this->table, function (Blueprint $table) {
-                $table->dropIndex('ip_index');
-            });
-    }
-
-    /**
      * Run the migrations.
      *
      * @return void
@@ -44,6 +31,19 @@ class ModifySpammersTableAddIndexes extends Migration
             ->table($this->table, function (Blueprint $table) {
                 $table->ipAddress('ip');
                 $table->index('ip', 'ip_index');
+            });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::connection($this->connection)
+            ->table($this->table, function (Blueprint $table) {
+                $table->dropIndex('ip_index');
             });
     }
 }

@@ -19,17 +19,6 @@ class CreateSpammersTable extends Migration
     }
 
     /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
-    public function down()
-    {
-        Schema::connection($this->connection)
-            ->dropIfExists($this->table);
-    }
-
-    /**
      * Run the migrations.
      *
      * @return void
@@ -46,5 +35,16 @@ class CreateSpammersTable extends Migration
                 $table->timestamps();
                 $table->softDeletes();
             });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::connection($this->connection)
+            ->dropIfExists($this->table);
     }
 }
