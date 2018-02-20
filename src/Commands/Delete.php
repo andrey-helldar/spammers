@@ -46,7 +46,7 @@ class Delete extends Command
             return;
         }
 
-        $result = \spammer($this->ip)->delete();
+        $result = spammer($this->ip)->delete();
 
         $this->info($result);
     }

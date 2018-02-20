@@ -46,7 +46,7 @@ class Exists extends Command
             return;
         }
 
-        if ($is_exist = \spammer($this->ip)->exists()) {
+        if (spammer($this->ip)->exists()) {
             $this->info("IP-address {$this->ip} is exists.");
 
             return;

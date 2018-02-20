@@ -42,7 +42,8 @@ class Scan extends Command
      */
     public function handle()
     {
-        SpammerModel::where('expired_at', '<', Carbon::now())
+        SpammerModel::query()
+            ->where('expired_at', '<', Carbon::now())
             ->delete();
     }
 }

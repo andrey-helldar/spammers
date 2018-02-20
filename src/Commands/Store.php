@@ -52,7 +52,7 @@ class Store extends Command
             return;
         }
 
-        $result = \spammer($this->ip)
+        $result = spammer($this->ip)
             ->expire($this->expired)
             ->store();
 

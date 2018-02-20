@@ -46,7 +46,7 @@ class Restore extends Command
             return;
         }
 
-        $result = \spammer($this->ip)->restore();
+        $result = spammer($this->ip)->restore();
 
         $this->info($result);
     }
