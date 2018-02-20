@@ -3,18 +3,24 @@
 return [
     /*
      * Connection name.
+     *
+     * Default, null.
      */
 
     'connection' => null,
 
     /*
      * Base table name.
+     *
+     * Default, "spammers".
      */
 
     'table' => 'spammers',
 
     /*
      * Table name for store accessing when get error pages.
+     *
+     * Default, "spammer_access".
      */
 
     'table_access' => 'spammer_access',
