@@ -26,7 +26,7 @@ class Store extends Command
      *
      * @var string
      */
-    protected $signature = 'spam:store {ip : IP-address of spammer} {--e|expired=0 : User Ban Expired Hours}';
+    protected $signature = 'spam:store {ip : IP-address of spammer} {--e|expired=0 : User ban expired hours}';
 
     /**
      * Create a new command instance.
