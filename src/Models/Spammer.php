@@ -14,7 +14,8 @@ class Spammer extends Model
      * @var array
      */
     protected $casts = [
-        'ip' => 'string',
+        'ip'       => 'string',
+        'attempts' => 'int',
     ];
 
     /**
@@ -29,7 +30,7 @@ class Spammer extends Model
      *
      * @var array
      */
-    protected $fillable = ['ip', 'expired_at'];
+    protected $fillable = ['ip', 'attempts', 'expired_at'];
 
     /**
      * Spammer constructor.

@@ -1,18 +1,16 @@
 <?php
 
-namespace Helldar\Spammers\migrations;
-
 use Helldar\Spammers\Traits\DbConnections;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class ModifySpammersTableAddIndexes extends Migration
+class ModifySpammersAddAttemptsTable extends Migration
 {
     use DbConnections;
 
     /**
-     * ModifySpammersTableAddIndexes constructor.
+     * ModifySpammersTableAddIncrement constructor.
      */
     public function __construct()
     {
@@ -29,8 +27,10 @@ class ModifySpammersTableAddIndexes extends Migration
     {
         Schema::connection($this->connection)
             ->table($this->table, function (Blueprint $table) {
-                $table->ipAddress('ip');
-                $table->index('ip', 'ip_index');
+                $table
+                    ->integer('attempts')
+                    ->default(0)
+                    ->after('ip');
             });
     }
 
@@ -43,7 +43,7 @@ class ModifySpammersTableAddIndexes extends Migration
     {
         Schema::connection($this->connection)
             ->table($this->table, function (Blueprint $table) {
-                $table->dropIndex('ip_index');
+                $table->dropColumn('attempts');
             });
     }
 }

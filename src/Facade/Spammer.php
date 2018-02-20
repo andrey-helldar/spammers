@@ -136,11 +136,32 @@ class Spammer
             return $this->errors;
         }
 
-        $ip         = $this->ip;
-        $expired_at = $this->expired_at;
-
-        return SpammerModel::query()
+        $item = SpammerModel::query()
             ->withTrashed()
-            ->firstOrCreate(compact('ip'), compact('expired_at'));
+            ->firstOrNew(['ip' => $this->ip]);
+
+        $item->expired_at = $this->expired_at;
+        $item->deleted_at = null;
+
+        $item->save();
+
+        return $item;
+    }
+
+    /**
+     * Amnesty for IP-address.
+     *
+     * @return array|null|string
+     */
+    public function amnesty()
+    {
+        return SpammerModel::query()
+            ->where('expired_at', '<', Carbon::now())
+            ->whereNotNull('expired_at')
+            ->get()
+            ->each(function (SpammerModel $item) {
+                $item->increment('attempts');
+                $item->delete();
+            });
     }
 }

@@ -4,7 +4,7 @@ return [
     /*
      * Connection name.
      *
-     * Default, null.
+     * Default, "mysql".
      */
 
     'connection' => null,
@@ -26,6 +26,14 @@ return [
     'table_access' => 'spammer_access',
 
     /*
+     * The period of days during which you need to consider the number of errors for IP addresses.
+     *
+     * Default, 24.
+     */
+
+    'period' => 24,
+
+    /*
      * Ban when attempts to get pages with errors exceed a given number.
      *
      * Example:
@@ -36,7 +44,7 @@ return [
      * Default, permanent ban.
      */
 
-    'ban_when_access' => [
+    'attempts' => [
         100 => 24,
         300 => 72,
         500 => null,

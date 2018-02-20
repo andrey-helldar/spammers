@@ -3,6 +3,7 @@
 namespace Helldar\Spammers\Facade;
 
 use Helldar\Spammers\Models\SpammerAccess as SpammerAccessModel;
+use Helldar\Spammers\Services\AttemptsService;
 use Helldar\Spammers\Traits\ValidateIP;
 
 class SpammerAccess
@@ -50,6 +51,10 @@ class SpammerAccess
         $ip  = $this->ip;
         $url = $this->url;
 
+        if ($this->isBanned()) {
+            return null;
+        }
+
         return SpammerAccessModel::query()
             ->create(compact('ip', 'url'));
     }
@@ -76,5 +81,14 @@ class SpammerAccess
         $this->url = $url;
 
         return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    private function isBanned()
+    {
+        return (new AttemptsService($this->ip))
+            ->check();
     }
 }
