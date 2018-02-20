@@ -16,13 +16,15 @@ class Spammers
      */
     public function handle(Request $request, \Closure $next)
     {
-        $is_spammer = spammer($request->getClientIp())->exists();
+        $ip = $request->ip();
 
-        if ($is_spammer && ($request->isJson() || $request->wantsJson())) {
-            return response()->json('Current IP-address founded in spam base.', 403);
+        if (spammer($ip)->exists()) {
+            if ($request->isJson() || $request->wantsJson()) {
+                return response()->json('Current IP-address founded in spam base.', 423);
+            }
+
+            abort(423);
         }
-
-        abort_if($is_spammer, 403);
 
         return $next($request);
     }
