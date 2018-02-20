@@ -36,22 +36,16 @@ class IpAddressNotExists
      */
     public function check()
     {
+        $builder = Spammer::query()->where('ip', $this->ip);
+
         if ($this->with_trashed) {
-            $spammer = Spammer::withTrashed()
-                ->whereIp($this->ip)
-                ->first();
+            $builder->withTrashed();
         }
         elseif ($this->only_trashed) {
-            $spammer = Spammer::onlyTrashed()
-                ->whereIp($this->ip)
-                ->first();
-        }
-        else {
-            $spammer = Spammer::whereIp($this->ip)
-                ->first();
+            $builder->onlyTrashed();
         }
 
-        return is_null($spammer);
+        return !$builder->exists();
     }
 
     /**

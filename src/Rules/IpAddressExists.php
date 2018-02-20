@@ -31,17 +31,13 @@ class IpAddressExists
      */
     public function check()
     {
+        $builder = Spammer::query()->where('ip', $this->ip);
+
         if ($this->with_trashed) {
-            $spammer = Spammer::withTrashed()
-                ->whereIp($this->ip)
-                ->first();
-        }
-        else {
-            $spammer = Spammer::whereIp($this->ip)
-                ->first();
+            $builder->withTrashed();
         }
 
-        return !is_null($spammer);
+        return $builder->exists();
     }
 
     /**
