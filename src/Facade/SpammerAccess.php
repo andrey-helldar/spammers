@@ -51,7 +51,7 @@ class SpammerAccess
         $url = $this->url;
 
         return SpammerAccessModel::query()
-            ->firstOrCreate(compact('ip'), compact('url'));
+            ->create(compact('ip', 'url'));
     }
 
     /**
