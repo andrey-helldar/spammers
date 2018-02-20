@@ -10,11 +10,6 @@ trait DbConnections
     protected $table_access = null;
 
     /**
-     * @var null
-     */
-    protected $table = null;
-
-    /**
      * Set a connection name.
      */
     public function setConnectionName()
