@@ -179,6 +179,7 @@ The `spam:amnesty` command allows you to delete IP-addresses that have expired.
 
 You can use a `Helldar\Spammers\Models\Spammer` model. His extended `Illuminate\Database\Eloquent\Model`.
 
+
 ### Simple Using
 
 You can specify globally in the attribute `$middleware` of the `Http/Kernel.php` file:
@@ -212,6 +213,14 @@ protected function schedule(Schedule $schedule)
         ->everyThirtyMinutes();
 }
 ```
+
+Execute the commands:
+```bash
+php artisan vendor:publish
+php artisan migrate
+```
+
+Customize the file `config/spammers.php` for your purposes.
 
 Profit!
 
