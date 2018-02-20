@@ -37,14 +37,6 @@ return [
     ],
 
     /*
-     * To activate the cache, specify the number of minutes.
-     *
-     * Default, false.
-     */
-
-    'use_cache' => false,
-
-    /*
      * Excluded IP-addresses.
      */
 
