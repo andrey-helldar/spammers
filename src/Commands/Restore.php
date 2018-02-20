@@ -21,7 +21,7 @@ class Restore extends Command
      *
      * @var string
      */
-    protected $signature = 'spam:restore {ip : IP-address of spammer}';
+    protected $signature = 'spam:restore {ip : IP-address}';
 
     /**
      * Create a new command instance.

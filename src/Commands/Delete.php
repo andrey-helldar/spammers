@@ -21,7 +21,7 @@ class Delete extends Command
      *
      * @var string
      */
-    protected $signature = 'spam:delete {ip : IP-address of spammer}';
+    protected $signature = 'spam:delete {ip : IP-address}';
 
     /**
      * Create a new command instance.

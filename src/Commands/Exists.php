@@ -21,7 +21,7 @@ class Exists extends Command
      *
      * @var string
      */
-    protected $signature = 'spam:exists {ip : IP-address of spammer}';
+    protected $signature = 'spam:exists {ip : IP-address}';
 
     /**
      * Create a new command instance.
