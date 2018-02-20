@@ -41,10 +41,10 @@ trait ValidateIP
      */
     public function isIpValidateError()
     {
-        $ip        = $this->ip;
+        $ip = $this->ip;
         $validator = \Validator::make(compact('ip'), [
             'url' => 'url',
-            'ip'  => [
+            'ip' => [
                 'required',
                 'ipv4',
                 Rule::notIn(config('spammers_settings.protected_ips', [])),
@@ -86,7 +86,7 @@ trait ValidateIP
      */
     private function isFounded()
     {
-        $ips        = config('spammers.exclude_ips', []);
+        $ips = config('spammers.exclude_ips', []);
         $is_founded = (new IpAddressNotInMask($this->ip, $ips))->check();
 
         if ($is_founded) {
@@ -112,7 +112,7 @@ trait ValidateIP
     private function messages()
     {
         return [
-            'not_in'     => "IP-address {$this->ip} is protected!",
+            'not_in' => "IP-address {$this->ip} is protected!",
             'is_founded' => "The IP-address {$this->ip} is found in the exclusion list!",
         ];
     }
