@@ -52,7 +52,12 @@ return [
 
     /*
      * Excluded IP-addresses.
+     *
+     * Mask support.
      */
 
-    'exclude_ips' => [],
+    'exclude_ips' => [
+        // '1.2.3.4',
+        // '1.2.3.*',
+    ],
 ];

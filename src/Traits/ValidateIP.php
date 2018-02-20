@@ -2,6 +2,7 @@
 
 namespace Helldar\Spammers\Traits;
 
+use Helldar\Spammers\Rules\IpAddressNotInMask;
 use Illuminate\Validation\Rule;
 
 trait ValidateIP
@@ -39,20 +40,38 @@ trait ValidateIP
      */
     public function isIpValidateError()
     {
-        $ip = $this->ip;
+        $ip        = $this->ip;
         $validator = \Validator::make(compact('ip'), [
             'url' => 'url',
-            'ip' => [
+            'ip'  => [
                 'required',
                 'ipv4',
                 Rule::notIn(config('spammers_settings.protected_ips', [])),
-                Rule::notIn(config('spammers.exclude_ips', [])),
-
+                //Rule::notIn(config('spammers.exclude_ips', [])),
             ],
         ], $this->messages());
 
         if ($validator->fails()) {
             return $validator->errors()->all();
+        }
+
+        if ($is_founded = $this->isFounded()) {
+            return $is_founded;
+        }
+
+        return null;
+    }
+
+    /**
+     * @return array|null
+     */
+    private function isFounded()
+    {
+        $ips        = config('spammers.exclude_ips', []);
+        $is_founded = (new IpAddressNotInMask($this->ip, $ips))->check();
+
+        if ($is_founded) {
+            return (array) $this->messages()['is_founded'];
         }
 
         return null;
@@ -66,7 +85,8 @@ trait ValidateIP
     private function messages()
     {
         return [
-            'not_in' => "IP-address {$this->ip} is protected!",
+            'not_in'     => "IP-address {$this->ip} is protected!",
+            'is_founded' => "The IP-address {$this->ip} is found in the exclusion list!",
         ];
     }
 }
