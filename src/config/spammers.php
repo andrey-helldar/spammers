@@ -60,4 +60,12 @@ return [
         // '1.2.3.4',
         // '1.2.3.*',
     ],
+
+    /*
+     * Banning the IP addresses of search bots and others?
+     *
+     * Default, false.
+     */
+
+    'ban_crawlers' => false,
 ];

@@ -20,7 +20,8 @@
         "illuminate/database": "^5.4",
         "illuminate/http": "^5.4",
         "illuminate/support": "^5.4",
-        "illuminate/validation": "^5.4"
+        "illuminate/validation": "^5.4",
+        "jaybizzle/laravel-crawler-detect": "^1.2"
     },
     "require-dev": {
         "mockery/mockery": "0.9.*",

@@ -3,6 +3,7 @@
 namespace Helldar\Spammers\Traits;
 
 use Helldar\Spammers\Rules\IpAddressNotInMask;
+use Helldar\Spammers\Rules\IsCrawler;
 use Illuminate\Validation\Rule;
 
 trait ValidateIP
@@ -55,11 +56,29 @@ trait ValidateIP
             return $validator->errors()->all();
         }
 
-        if ($is_founded = $this->isFounded()) {
-            return $is_founded;
+        if ($errors = $this->additionalRules()) {
+            return $errors;
         }
 
         return null;
+    }
+
+    /**
+     * @return array
+     */
+    private function additionalRules()
+    {
+        $errors = [];
+
+        if ($is_founded = $this->isFounded()) {
+            $errors[] = $is_founded;
+        }
+
+        if ($is_crawler = $this->isCrawler()) {
+            $errors[] = $is_crawler;
+        }
+
+        return $errors;
     }
 
     /**
@@ -75,6 +94,14 @@ trait ValidateIP
         }
 
         return null;
+    }
+
+    /**
+     * @return array|null
+     */
+    private function isCrawler()
+    {
+        return (new IsCrawler($this->ip))->check();
     }
 
     /**

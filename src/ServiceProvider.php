@@ -7,6 +7,7 @@ use Helldar\Spammers\Commands\Delete;
 use Helldar\Spammers\Commands\Exists;
 use Helldar\Spammers\Commands\Restore;
 use Helldar\Spammers\Commands\Store;
+use Jaybizzle\LaravelCrawlerDetect\LaravelCrawlerDetectServiceProvider;
 
 class ServiceProvider extends \Illuminate\Support\ServiceProvider
 {
@@ -51,5 +52,7 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
         $this->mergeConfigFrom(
             __DIR__ . '/config/settings.php', 'spammers_settings'
         );
+
+        $this->app->register(LaravelCrawlerDetectServiceProvider::class);
     }
 }
