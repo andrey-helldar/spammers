@@ -14,7 +14,7 @@ class Spammer extends Model
      * @var array
      */
     protected $casts = [
-        'ip'       => 'string',
+        'ip' => 'string',
         'attempts' => 'int',
     ];
 

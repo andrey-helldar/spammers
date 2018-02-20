@@ -40,8 +40,7 @@ class IpAddressNotExists
 
         if ($this->with_trashed) {
             $builder->withTrashed();
-        }
-        elseif ($this->only_trashed) {
+        } elseif ($this->only_trashed) {
             $builder->onlyTrashed();
         }
 
