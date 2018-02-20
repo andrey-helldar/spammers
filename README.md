@@ -41,7 +41,7 @@ If you don't use auto-discovery, add the ServiceProvider to the providers array 
 
     Helldar\Spammers\ServiceProvider::class,
 
-Next, call `php artisan vendor:publish` and `php artisan migrate` commands after set up [config/spammers.php](src/config/spammers.php) file.
+Next, call `php artisan vendor:publish` and `php artisan migrate` commands after set up [config/spammers.php](src/config/spammers.php) file and install the migrations by running `php artisan migrate` command.
 
 Now, use `spammer()` helper and Artisan commands.
 
