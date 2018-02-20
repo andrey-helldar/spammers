@@ -29,7 +29,7 @@ class SpammerAccess
     /**
      * Store URL-address into database.
      *
-     * @return null|\Illuminate\Support\MessageBag|SpammerAccess
+     * @return $this|array|\Illuminate\Database\Eloquent\Model|\Illuminate\Support\MessageBag|null|string
      */
     public function store()
     {
@@ -37,7 +37,11 @@ class SpammerAccess
             return $this->errors;
         }
 
-        return SpammerAccessModel::create(['ip' => $this->ip], ['url' => $this->url]);
+        $ip  = $this->ip;
+        $url = $this->url;
+
+        return SpammerAccessModel::query()
+            ->firstOrCreate(compact('ip'), compact('url'));
     }
 
     /**
@@ -54,7 +58,7 @@ class SpammerAccess
         ]);
 
         if ($validator->fails()) {
-            $this->errors = $validator->errors();
+            $this->errors = $validator->errors()->all();
 
             return $this;
         }

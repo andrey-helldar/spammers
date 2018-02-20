@@ -2,6 +2,8 @@
 
 namespace Helldar\Spammers\Middleware;
 
+use Illuminate\Http\Request;
+
 class Spammers
 {
     /**
@@ -12,9 +14,9 @@ class Spammers
      *
      * @return mixed
      */
-    public function handle($request, \Closure $next)
+    public function handle(Request $request, \Closure $next)
     {
-        $is_spammer = \spammer($request->getClientIp())->exists();
+        $is_spammer = spammer($request->getClientIp())->exists();
 
         if ($is_spammer && ($request->isJson() || $request->wantsJson())) {
             return response()->json('Current IP-address founded in spam base.', 403);

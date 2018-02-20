@@ -17,11 +17,11 @@ trait ValidateIP
     protected $ip = null;
 
     /**
-     * @param array $errors
+     * @param null|string|array $errors
      */
-    public function errorsInConsole($errors = [])
+    public function errorsInConsole($errors = null)
     {
-        if (gettype($errors) !== 'array' && gettype($errors) !== 'object') {
+        if (!is_array($errors) && !is_object($errors)) {
             $this->error($errors);
 
             return;
@@ -39,7 +39,8 @@ trait ValidateIP
      */
     public function isIpValidateError()
     {
-        $validator = \Validator::make(['ip' => $this->ip], [
+        $ip        = $this->ip;
+        $validator = \Validator::make(compact('ip'), [
             'url' => 'url',
             'ip'  => [
                 'required',
@@ -51,7 +52,7 @@ trait ValidateIP
         ], $this->messages());
 
         if ($validator->fails()) {
-            return $validator->errors();
+            return $validator->errors()->all();
         }
 
         return null;
