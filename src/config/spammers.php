@@ -20,10 +20,10 @@ return [
     /*
      * Table name for store accessing when get error pages.
      *
-     * Default, "spammer_access".
+     * Default, "spammer_accesses".
      */
 
-    'table_access' => 'spammer_access',
+    'table_access' => 'spammer_accesses',
 
     /*
      * The period of days during which you need to consider the number of errors for IP addresses.
