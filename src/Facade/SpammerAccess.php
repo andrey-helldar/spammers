@@ -48,7 +48,7 @@ class SpammerAccess
             return $this->errors;
         }
 
-        $ip = $this->ip;
+        $ip  = $this->ip;
         $url = $this->url;
 
         if ($this->isBanned()) {

@@ -23,7 +23,7 @@ class IpAddressNotInMask
     public function __construct($client_ip = null, $ips = [])
     {
         $this->client_ip = $client_ip;
-        $this->ips = $ips;
+        $this->ips       = $ips;
     }
 
     /**
