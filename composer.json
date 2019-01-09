@@ -27,6 +27,9 @@
         "mockery/mockery": "0.9.*|1.*",
         "phpunit/phpunit": "^5.0|^6.0|^7.0"
     },
+    "suggest": {
+        "symfony/thanks": "Give thanks (in the form of a GitHub) to your fellow PHP package maintainers"
+    },
     "autoload": {
         "psr-4": {
             "Helldar\\Spammers\\": "src/"
