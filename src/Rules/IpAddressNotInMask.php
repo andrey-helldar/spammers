@@ -44,8 +44,6 @@ class IpAddressNotInMask
      * @param $pattern
      * @param $value
      *
-     * @see \Illuminate\Support\Str::is
-     *
      * @return bool
      */
     private function is($pattern, $value)
