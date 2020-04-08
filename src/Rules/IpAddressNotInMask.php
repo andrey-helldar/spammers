@@ -5,7 +5,7 @@ namespace Helldar\Spammers\Rules;
 class IpAddressNotInMask
 {
     /**
-     * @var null|string
+     * @var string|null
      */
     protected $client_ip;
 
@@ -17,7 +17,7 @@ class IpAddressNotInMask
     /**
      * IpAddressNotInMask constructor.
      *
-     * @param null|string $client_ip
+     * @param string|null $client_ip
      * @param array       $ips
      */
     public function __construct($client_ip = null, $ips = [])

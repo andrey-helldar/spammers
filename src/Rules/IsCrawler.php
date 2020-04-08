@@ -5,7 +5,7 @@ namespace Helldar\Spammers\Rules;
 class IsCrawler
 {
     /**
-     * @var null|string
+     * @var string|null
      */
     protected $ip;
 

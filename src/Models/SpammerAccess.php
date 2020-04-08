@@ -8,7 +8,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class SpammerAccess extends Model
 {
-    use SoftDeletes, DbConnections;
+    use SoftDeletes;
+    use DbConnections;
 
     /**
      * @var array

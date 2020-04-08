@@ -46,11 +46,13 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
     public function register()
     {
         $this->mergeConfigFrom(
-            __DIR__ . '/config/spammers.php', 'spammers'
+            __DIR__ . '/config/spammers.php',
+            'spammers'
         );
 
         $this->mergeConfigFrom(
-            __DIR__ . '/config/settings.php', 'spammers_settings'
+            __DIR__ . '/config/settings.php',
+            'spammers_settings'
         );
 
         $this->app->register(LaravelCrawlerDetectServiceProvider::class);
