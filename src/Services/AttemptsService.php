@@ -9,7 +9,7 @@ use Helldar\Spammers\Models\SpammerAccess;
 class AttemptsService
 {
     /**
-     * @var null|string
+     * @var string|null
      */
     private $ip;
 
@@ -26,7 +26,7 @@ class AttemptsService
     /**
      * AttemptsService constructor.
      *
-     * @param null|string $ip
+     * @param string|null $ip
      */
     public function __construct($ip = null)
     {

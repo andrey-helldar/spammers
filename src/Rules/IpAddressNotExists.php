@@ -7,7 +7,7 @@ use Helldar\Spammers\Models\Spammer;
 class IpAddressNotExists
 {
     /**
-     * @var null|string
+     * @var string|null
      */
     protected $ip = null;
 

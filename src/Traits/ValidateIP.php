@@ -9,17 +9,17 @@ use Illuminate\Validation\Rule;
 trait ValidateIP
 {
     /**
-     * @var null|string|array
+     * @var array|string|null
      */
     protected $errors = null;
 
     /**
-     * @var null|string
+     * @var string|null
      */
     protected $ip = null;
 
     /**
-     * @param null|string|array $errors
+     * @param array|string|null $errors
      */
     public function errorsInConsole($errors = null)
     {

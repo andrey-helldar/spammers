@@ -40,7 +40,7 @@ class SpammerAccess
     /**
      * Store URL-address into database.
      *
-     * @return $this|array|\Illuminate\Database\Eloquent\Model|\Illuminate\Support\MessageBag|null|string
+     * @return $this|array|\Illuminate\Database\Eloquent\Model|\Illuminate\Support\MessageBag|string|null
      */
     public function store()
     {

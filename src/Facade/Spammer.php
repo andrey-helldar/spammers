@@ -13,7 +13,7 @@ class Spammer
     use ValidateIP;
 
     /**
-     * @var null|string
+     * @var string|null
      */
     protected $expired_at = null;
 
@@ -54,7 +54,7 @@ class Spammer
     /**
      * Delete IP-address from a spam-table.
      *
-     * @return null|array|string|\Helldar\Spammers\Models\Spammer
+     * @return array|\Helldar\Spammers\Models\Spammer|string|null
      */
     public function delete()
     {
@@ -103,7 +103,7 @@ class Spammer
     /**
      * Restore IP-address from a spam-table.
      *
-     * @return null|array|string|\Helldar\Spammers\Models\Spammer
+     * @return array|\Helldar\Spammers\Models\Spammer|string|null
      */
     public function restore()
     {
@@ -128,7 +128,7 @@ class Spammer
     /**
      * Store IP-address in a spam-table.
      *
-     * @return null|array|\Helldar\Spammers\Models\Spammer|\Illuminate\Support\MessageBag
+     * @return array|\Helldar\Spammers\Models\Spammer|\Illuminate\Support\MessageBag|null
      */
     public function store()
     {
@@ -151,7 +151,7 @@ class Spammer
     /**
      * Amnesty for IP-address.
      *
-     * @return array|null|string
+     * @return array|string|null
      */
     public function amnesty()
     {
